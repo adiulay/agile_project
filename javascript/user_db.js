@@ -3,6 +3,8 @@ const _ = require('lodash');
 
 const path = './user_database.json';
 
+const md5 = require('./MD5');
+
 try{
     if (fs.existsSync(path)){
         console.log('user_database.json is found');
@@ -30,7 +32,7 @@ var add_new_user = (first_name, last_name, email, password, password_repeat) => 
             First_Name: first_name,
             Last_Name: last_name,
             Email_Address: email,
-            Password: password
+            Password: md5.encrypt(password)
         };
         var result_user_account = JSON.stringify(userObject, undefined, 2);
         fs.writeFileSync('user_database.json', result_user_account);
@@ -43,7 +45,7 @@ var login_check = (email, password) => {
     // console.log(typeof userObject.Password);
 
     if (email in userObject) {
-        if (userObject[`${email}`].Password === password) {
+        if (userObject[`${email}`].Password === md5.encrypt(password)) {
             return 'Success!'
         } else {
             return 'Password incorrect'

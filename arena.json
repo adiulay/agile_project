@@ -1,7 +1,7 @@
 {
-  "player_name": "Reza",
-  "player_health": 31,
-  "player_dps": 6,
+  "player_name": "Adiulay",
+  "player_health": 2,
+  "player_dps": 36,
   "enemy_health": 0,
-  "enemy_dps": -4
+  "enemy_dps": 27
 }

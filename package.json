@@ -13,9 +13,13 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "hbs": "^4.0.3",
+    "express-session": "^1.16.1",
+    "hbs": "^4.0.4",
     "init": "^0.1.2",
     "lodash": "^4.17.11",
     "mongodb": "^3.2.3"
+  },
+  "devDependencies": {
+    "jshint": "^2.10.2"
   }
 }
