@@ -1,0 +1,10 @@
+{
+  "asdf@gmail.com": {
+    "email": "asdf@gmail.com",
+    "character_name": "Adiulay",
+    "character_health": 93,
+    "character_attack_damage": 41,
+    "win": 6,
+    "lost": 8
+  }
+}

@@ -1,86 +1,8 @@
 {
-  "95jvt71@gmail.com": {
-    "First_Name": "asdfasdf",
-    "Last_Name": "asdfasdf",
-    "Email_Address": "95jvt71@gmail.com",
-    "Password": "asdfasdf"
-  },
   "asdf@gmail.com": {
-    "First_Name": "asdfasdf",
-    "Last_Name": "asdfasdf",
-    "Email_Address": "asdf@gmail.com",
-    "Password": "asdfasdf"
-  },
-  "masterkai56@gmail.com": {
-    "First_Name": "Alex",
-    "Last_Name": "Cho",
-    "Email_Address": "masterkai56@gmail.com",
-    "Password": "alslalsl123"
-  },
-  "asd@gmail.com": {
     "First_Name": "Jimmy",
     "Last_Name": "Truong",
-    "Email_Address": "asd@gmail.com",
-    "Password": "alslalsl123"
-  },
-  "Cookie@gmail.com": {
-    "First_Name": "Cookie",
-    "Last_Name": "Cookie",
-    "Email_Address": "Cookie@gmail.com",
-    "Password": "alslalsl123"
-  },
-  "joey@gmail.com": {
-    "First_Name": "Joey",
-    "Last_Name": "Gotengo",
-    "Email_Address": "joey@gmail.com",
-    "Password": "alslalsl123"
-  },
-  "qwe@gmail.com": {
-    "First_Name": "Neda",
-    "Last_Name": "P",
-    "Email_Address": "qwe@gmail.com",
-    "Password": "alslalsl123"
-  },
-  "lol@gmail.com": {
-    "First_Name": "ti",
-    "Last_Name": "lo",
-    "Email_Address": "lol@gmail.com",
-    "Password": "alslalsl123"
-  },
-  "ma@gmail.com": {
-    "First_Name": "Tl",
-    "Last_Name": "lo",
-    "Email_Address": "ma@gmail.com",
-    "Password": "alslalsl123"
-  },
-  "ka@gmail.com": {
-    "First_Name": "Li",
-    "Last_Name": "Ka",
-    "Email_Address": "ka@gmail.com",
-    "Password": "alslalsl123"
-  },
-  "hi@gmail.com": {
-    "First_Name": "ASd",
-    "Last_Name": "asdqw",
-    "Email_Address": "hi@gmail.com",
-    "Password": "qweqweqwe"
-  },
-  "an@gmail.com": {
-    "First_Name": "Alex",
-    "Last_Name": "lo",
-    "Email_Address": "an@gmail.com",
-    "Password": "alslalsl123"
-  },
-  "1234@gmail.com": {
-    "First_Name": "jack",
-    "Last_Name": "li",
-    "Email_Address": "1234@gmail.com",
-    "Password": "asdfasdf"
-  },
-  "123123@gmail.com": {
-    "First_Name": "ALex",
-    "Last_Name": "Cho",
-    "Email_Address": "123123@gmail.com",
-    "Password": "alslalsl123"
+    "Email_Address": "asdf@gmail.com",
+    "Password": "6a204bd89f3c8348afd5c77c717a097a"
   }
 }
