@@ -17,7 +17,8 @@
     "hbs": "^4.0.4",
     "init": "^0.1.2",
     "lodash": "^4.17.11",
-    "mongodb": "^3.2.3"
+    "mongodb": "^3.2.3",
+    "password-hash": "^1.2.2"
   },
   "devDependencies": {
     "jshint": "^2.10.2"

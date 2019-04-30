@@ -1,9 +1,8 @@
 const fs = require('fs');
 const _ = require('lodash');
+const passwordHash = require('password-hash')
 
 const path = './user_database.json';
-
-const md5 = require('./MD5');
 
 try{
     if (fs.existsSync(path)){
@@ -32,7 +31,7 @@ var add_new_user = (first_name, last_name, email, password, password_repeat) => 
             First_Name: first_name,
             Last_Name: last_name,
             Email_Address: email,
-            Password: md5.encrypt(password)
+            Password: passwordHash.generate(password)
         };
         var result_user_account = JSON.stringify(userObject, undefined, 2);
         fs.writeFileSync('user_database.json', result_user_account);
@@ -45,7 +44,7 @@ var login_check = (email, password) => {
     // console.log(typeof userObject.Password);
 
     if (email in userObject) {
-        if (userObject[`${email}`].Password === md5.encrypt(password)) {
+        if (passwordHash.verify(password, userObject[`${email}`].Password) === true) {
             return 'Success!'
         } else {
             return 'Password incorrect'
