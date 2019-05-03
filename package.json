@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --exit",
     "start": "node app.js"
   },
   "author": "",
@@ -22,6 +22,13 @@
     "password-hash": "^1.2.2"
   },
   "devDependencies": {
-    "jshint": "^2.10.2"
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "cheerio": "^1.0.0-rc.3",
+    "firebase-functions-test": "^0.1.6",
+    "jshint": "^2.10.2",
+    "mocha": "^6.1.4",
+    "nock": "^10.0.6",
+    "supertest": "^4.0.2"
   }
 }

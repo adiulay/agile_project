@@ -13,15 +13,40 @@
 
     <body class="background">
 
-        {{> header}}
+        <header class="title">
+            {{header}}
+        </header>
 
-        {{> navigation_bar}}
-
+<!--this long azz is based off of partials navigation_bar-->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-3">
+                    <nav class="navbar navbar-expand-sm navbar-dark">
+                        <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class= "nav_text collapse navbar-collapse ml-auto" id="navbarNav">
+                            <a class="navbar-brand" href="/"><img src="../Images/emblem.png"></a>
+                            <ul class="navbar-nav ">
+                                <li class="nav-item active">
+                                    <a class="nav-link nav-color" href="/">Home<span class="sr-only">(current)</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-4 lightbox">
                     <h1>Fighting Game</h1>
-                    {{>description}}
+<!--                    this is description partial description-->
+                    <p>
+                        Welcome to the Fight Simulator! Fight against randomly generated enemies and fight! Defeat enemies
+                        to increase your DPS so that you can dominate the fight!
+                    </p>
                 </div>
                 <div class="col-md-4"></div>
                 <div class="col-md-4 lightbox">
@@ -44,10 +69,6 @@
                 </div>
             </div>
         </div>
-
-        {{output}}
-
-        {{welcome}}
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

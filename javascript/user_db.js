@@ -140,8 +140,18 @@ var email_get = async (email) => {
     // }
 };
 
+var delete_test = async () => {
+    var db = firebase.firestore();
+ try {
+     await db.collection("accounts").doc("test_email@gmail.com").delete()
+ } catch (err) {
+     console.log('Testing phase error code')
+ }
+};
+
 module.exports = {
     add_new_user: add_new_user,
     login_check: login_check,
-    email_get: email_get
+    email_get: email_get,
+    delete_test
 };

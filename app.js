@@ -6,6 +6,8 @@ const axios = require('axios');
 const _ = require('lodash');
 const fs = require('fs');
 
+const path = require('path');
+
 const {
     PORT = 8080,
     SESS_LIFETIME = 1000 * 60 * 60 * 2,
@@ -28,6 +30,7 @@ var user = 'Characters';
 // var name = user_db.email_get(user);
 
 var app = express();
+// hbs.registerPartials(path.join(__dirname, '../', '/views/partials'));
 hbs.registerPartials(__dirname + '/views/partials');
 
 app.use(bodyParser.json());
@@ -66,6 +69,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'hbs');
 
 app.use(express.static(__dirname + '/views'));
+// app.use(express.static(path.join(__dirname, '../', '/views')));
 
 app.get('/', redirectHome, (request, response) => {
     // if (request.session.userId) {
@@ -74,7 +78,6 @@ app.get('/', redirectHome, (request, response) => {
     response.render('index.hbs', {
         title_page: 'Official Front Page',
         header: 'Fight Simulator',
-        welcome: `Welcome ${user}`,
         username: user
     })
     // }
@@ -87,8 +90,8 @@ app.post('/user_logging_in', async (request, response) => {
 
     if (output === 'Success!') {
         // authentication = true;
-        request.session.userId = email;
         user = email;
+        request.session.userId = await user_db.email_get(user);
         response.redirect('/index_b')
     } else {
         // response.redirect('/')
@@ -113,13 +116,13 @@ app.get('/logout', redirectLogin, (request, response) => {
     response.redirect('/');
 });
 
-app.get('/index_b', redirectLogin, async (request, response) => {
-    var name = await user_db.email_get(user);
+app.get('/index_b', redirectLogin, (request, response) => {
+    // var name = await user_db.email_get(user);
     response.render('index_b.hbs', {
         title_page: 'Official Front Page',
         header: 'Fight Simulator',
-        welcome: `Welcome ${name}`,
-        username: name
+        welcome: `Welcome ${request.session.userId}`,
+        username: request.session.userId
     })
 });
 
@@ -157,7 +160,7 @@ app.get('/character', redirectLogin, async (request, response) => {
         response.render('character.hbs', {
             title_page: 'My Character Page',
             header: 'Character Stats',
-            username: await user_db.email_get(user),
+            username: request.session.userId,
             character_name: 'CREATE CHARACTER NOW',
             character_health: 'CREATE CHARACTER NOW',
             character_dps: 'CREATE CHARACTER NOW'
@@ -166,7 +169,7 @@ app.get('/character', redirectLogin, async (request, response) => {
         response.render('character.hbs', {
             title_page: 'My Character Page',
             header: 'Character Stats',
-            username: await user_db.email_get(user),
+            username: request.session.userId,
             character_name: character_detail.character_name,
             character_health: character_detail.character_health,
             character_dps: character_detail.character_attack_damage
@@ -175,7 +178,7 @@ app.get('/character', redirectLogin, async (request, response) => {
 });
 
 app.get('/character_creation', redirectLogin, async (request, response) => {
-    var name = await user_db.email_get(user);
+    // var name = await user_db.email_get(user);
 
     var authenticate = await character_db.authenticate(user);
 
@@ -184,7 +187,7 @@ app.get('/character_creation', redirectLogin, async (request, response) => {
         response.render('character_creation.hbs', {
             title_page: 'Character Creation',
             header: 'Create Character',
-            username: name,
+            username: request.session.userId,
             output_error: `${output}`
         })
     } else {
@@ -192,7 +195,7 @@ app.get('/character_creation', redirectLogin, async (request, response) => {
         response.render('character_creation.hbs', {
             title_page: 'Character Creation',
             header: 'Create Character',
-            username: name,
+            username: request.session.userId,
             output_error: `${output}`
         })
     }
@@ -218,7 +221,7 @@ app.get('/account', redirectLogin, async (request, response) => {
         response.redirect('/account_error');
     } else {
         response.render('account.hbs', {
-            name: await user_db.email_get(user),
+            name: request.session.userId,
             win: account_detail.win,
             losses: account_detail.lost,
             email: user,
@@ -228,11 +231,11 @@ app.get('/account', redirectLogin, async (request, response) => {
 });
 
 app.get('/account_error', async (request, response) => {
-    var name = await user_db.email_get(user);
+    // var name = await user_db.email_get(user);
     response.render('account_error.hbs',{
         email: user,
         header: 'Account',
-        name: name
+        name: request.session.userId
     })
 });
 
@@ -254,7 +257,7 @@ app.get('/fight', redirectLogin, async (request, response) => {
             response.render('fighting.hbs', {
                 title_page: `Let's fight!`,
                 header: 'Fight Fight Fight!',
-                username: await user_db.email_get(user),
+                username: request.session.userId,
                 character_name: arena_stats.player_name,
                 enemy_name: `The Enemy`,
                 health_player: `Health: ${arena_stats.player_health}`,
@@ -277,14 +280,14 @@ app.get('/battle', redirectLogin, async (request, response) => {
         await character_db.updateWin(user);
         response.render('win_lose_page.hbs', {
             win_lose: 'YOU WIN',
-            username: await user_db.email_get(user)
+            username: request.session.userId
         })
     } else if (await fight.battleOutcome(user) === false) {
 
         await character_db.updateLost(user);
         response.render('win_lose_page.hbs', {
             win_lose: 'YOU LOSE',
-            username: await user_db.email_get(user)
+            username: request.session.userId
         })
     } else {
         var arena_stats = await fight.get_info(user); //This is a dictionary
@@ -297,7 +300,7 @@ app.get('/battle', redirectLogin, async (request, response) => {
         response.render('fighting.hbs', {
             title_page: `Let's fight!`,
             header: 'Fight Fight Fight!',
-            username: await user_db.email_get(user),
+            username: request.session.userId,
             character_name: result.player_name,
             enemy_name: `The Enemy`,
             health_player: `Health: ${result.player_health}`,
@@ -323,7 +326,7 @@ app.get('/update_name', redirectLogin, async (request, response) => {
         response.render('update_name.hbs', {
             title_page: "Update Name",
             header: "Update Character Name",
-            username: await user_db.email_get(user)
+            username: request.session.userId
         })
     }
 });
@@ -333,7 +336,7 @@ app.post('/delete', redirectLogin, async (request, response) => {
     response.render('character.hbs', {
         title_page: 'My Character Page',
         header: 'Character Stats',
-        username: await user_db.email_get(user),
+        username: request.session.userId,
         character_name: 'CREATE CHARACTER NOW',
         character_health: 'CREATE CHARACTER NOW',
         character_dps: 'CREATE CHARACTER NOW'
@@ -344,3 +347,5 @@ app.listen(PORT, () => {
     console.log(`Server is up on the port ${PORT}`);
     // character_db.init();
 });
+
+module.exports = app;
