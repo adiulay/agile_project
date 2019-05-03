@@ -1,12 +1,20 @@
 .banner {
-    background-image: url("../images/banner.jpg");
+    background-image: url("../images/banner6.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     width: 100%;
     height: 225px;
+    text-align: center;
+    color:white;
+    margin-top: 0px;
+
+}
+h2{
+    padding-top: 100px;
+
 }
 .navbar{
-    background-color: #00695c;
+    background-color:#3c3c3c;
 }
 .search-container{
     float:right;
@@ -21,7 +29,7 @@
 }
 .post{
     margin:50px;
-    background-color: seagreen;
+    background-color:#3c3c3c;
     border-style: initial;
     width: 100%;
     height: auto;
@@ -65,17 +73,18 @@ p{
 h3{
     padding:10px;
     display:block;
-    background-color: #00695c;
+    background-color:#3c3c3c;
     text-align: left;
     font-size: 20px;
     color: white;
 }
 
 h1{
-    margin: 30px;
+    margin: 20px;
     color:white;
     font-size: x-large;
-
+    text-align: center;
+    padding-right: 200px;
 }
 
 body{
@@ -84,7 +93,7 @@ body{
 
 
 footer {
-    background-color:#00695c;
+    background-color: #222222;
     padding: 10px;
     text-align: center;
     color: white;
@@ -114,5 +123,23 @@ progress{
 }
 
 .container-fluid{
-    background-color: ;
+    background-image: url("../images/background6.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height:auto;
+
+}
+.jumbotron{
+    background-image: url("../images/background6.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height:auto;
+
+}
+
+.register{
+
+    margin-top: 100px;
 }
