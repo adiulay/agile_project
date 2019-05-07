@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
+    <link rel="stylesheet" href="../static/css/app.css">
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCT-ig3IbJNgfDjoPqrOjjfrXj-pFkRuj0",
+            authDomain: "acit2911-project.firebaseapp.com",
+            databaseURL: "https://acit2911-project.firebaseio.com",
+            projectId: "acit2911-project",
+            storageBucket: "acit2911-project.appspot.com",
+            messagingSenderId: "290770888287"
+        };
+        firebase.initializeApp(config);
+    </script>
+</head>
+<body>
+<form method="post" action="#">
+    Email:<br>
+    <input type="text" id="usr_email"><br>
+    User Password:<br>
+    <input type="text" id="usr_pass"><br>
+    <button type="button" onclick="signIn()">Sign In</button>
+    <button type="button" onclick="signOut()">Sign Out</button>
+    <button type="button" onclick="faceLogin()">FaceLogin</button>
+</form>
+<div id="app">
+    <div style="background: url('/static/imgs/icon-plane.png') #FFEFE4">
+        <video  id="video" autoplay style="width: 0%;height: 0%;opacity: 0.2"></video>
+        <!--draw video screenshots-->
+        <canvas id="canvas" width="480" height="320"></canvas>
+    </div>
+    <!-- /.right-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+             immediately after the control sidebar -->
+</div>
+<script type="text/javascript" src="../static/js/app.js"></script>
+<script type="text/javascript" src="../static/js/login.js"></script>
+<script type="text/javascript" src="../static/js/face.js"></script>
+</body>
+</html>
