@@ -15,7 +15,7 @@
 
 <body>
 
-
+<button onclick="location.href = '/';" class="btn btn-primary float-right">Home</button>
 <div class="jumbotron">
     <div class="card bg-light" id="formMsg">
         <form class="p-4" action="/forum_post" method="POST">
@@ -29,7 +29,7 @@
 <!--                       placeholder="Username" name="username">-->
 
                 <input type="text" class="form-control form-control-sm mb-3" id="message-body"
-                       placeholder="The title of your message" name="message_title" required>
+                       placeholder="Subject!" name="message_title" required>
             </div>
             <div class="md-form">
                 <textarea id="form10" name="message_body" class="md-textarea form-control" rows="3" placeholder="Your message goes here!" required></textarea>

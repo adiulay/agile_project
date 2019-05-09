@@ -39,7 +39,7 @@ var createCharacter = async (email, character_name) => {
         var check_email_exist = await db.collection('characters').doc(email).get();
 
         if (check_email_exist.data().email === email) {
-            return 'Email is already taken.'
+            return 'Character is already taken.'
         } else {
             db.collection('characters').doc(email).set(data);
             return 'Account created!'

@@ -35,7 +35,7 @@ firebase.initializeApp({
 // var readUser = fs.readFileSync("user_database.json");
 // var userObject = JSON.parse(readUser);
 
-var add_new_user = async (first_name, last_name, email, password, re_password) => {
+var add_new_user = async (username, email, password, re_password) => {
 
     if (password !== re_password) {
         //checks password whenever necessary
@@ -47,14 +47,15 @@ var add_new_user = async (first_name, last_name, email, password, re_password) =
             var data = {
                 email: email,
                 password: passwordHash.generate(password),
-                username: first_name,
-                last_name: last_name
+                username: username
             };
             //checks for email if exist
             var check_email_exist = await db.collection('accounts').doc(email).get();
 
             if (check_email_exist.data().email === email) {
                 return 'Email is already taken.'
+            } else if (check_email_exist.data().username === username) {
+                return 'Username is already taken.'
             } else {
                 db.collection('accounts').doc(email).set(data);
                 return 'Account created!'
@@ -180,6 +181,7 @@ var delete_account = async(email) => {
 ///////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////FORUM FUNCTIONS/////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
+
 var get_documents = async (collection_name) => {
     //fetches all the documents in the collection
     var db = firebase.firestore();
@@ -196,7 +198,7 @@ var get_documents = async (collection_name) => {
         });
 
         //returns a list of documents info
-        console.log(list)
+        // console.log(list)
         return list.sort((a, b) => {
             return new Date(b.created) - new Date(a.created)
         });
@@ -264,6 +266,37 @@ var post_message = async(subject, message, email) => {
 
 // console.log(Date(value))
 
+var delete_test_message = async() => {
+    try{
+        //fetches all the documents in the collection
+        var db = firebase.firestore();
+
+        var messages = await db.collection('messages');
+
+        var get_messages = await messages.get();
+
+        get_messages.forEach((element) => {
+
+            if (element.data().username === 'DELETEMESSAGE') {
+                db.collection('messages').doc(element.id).delete();
+            }
+            // console.log(element.data().username)
+        });
+
+        return 'Testing Message deleted'
+
+        //returns a list of documents info
+        // console.log(list)
+
+        // return list.sort((a, b) => {
+        //     return new Date(b.created) - new Date(a.created)
+        // });
+
+    } catch (err) {
+        return err
+    }
+};
+
 module.exports = {
     add_new_user: add_new_user,
     login_check: login_check,
@@ -272,5 +305,6 @@ module.exports = {
     delete_account,
     check_email,
     get_documents,
-    post_message
+    post_message,
+    delete_test_message
 };

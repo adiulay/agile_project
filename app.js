@@ -139,12 +139,12 @@ app.get('/sign_up', redirectHome, (request, response) => {
 
 app.post('/insert', redirectHome, async (request, response) => {
     var first_name = request.body.first_name;
-    var last_name = request.body.last_name;
+    // var last_name = request.body.last_name;
     var email = request.body.email;
     var password = request.body.password;
     var password_repeat = request.body.password_repeat;
 
-    var output = await user_db.add_new_user(first_name, last_name, email, password, password_repeat);
+    var output = await user_db.add_new_user(first_name, email, password, password_repeat);
     // var character_db_add = character_db.createAccount(email);
     // console.log(character_db_add);
 
@@ -204,14 +204,14 @@ app.get('/character_creation', redirectLogin, async (request, response) => {
     }
 });
 
-app.post('/create_character', redirectLogin, (request, response) => {
+app.post('/create_character', redirectLogin, async (request, response) => {
     var character_name = request.body.character_name;
 
-    var outputting = character_db.createCharacter(user, character_name);
+    var outputting = await character_db.createCharacter(user, character_name);
 
-    if (outputting !== '/user_logging_in') {
-        response.redirect('/character_creation')
-    } else if (outputting === '/user_logging_in') {
+    if (outputting === 'Character is already taken.') {
+        response.redirect('back')
+    } else if (outputting === 'Character created!') {
         response.redirect('/character')
     }
 });
@@ -357,25 +357,12 @@ app.get('/forum', async (request, response) => {
 });
 
 app.post('/forum_post', redirectLogin, async (request, response) => {
-    // var get_message =  user_db.get_documents('messages');
-    // var username = request.body.username;
     var message_title = request.body.message_title;
     var message_body = request.body.message_body;
 
-    // console.log(username)
-    // console.log(message_body)
-    // console.log(message_title)
+    await user_db.post_message(message_title, message_body, user);
 
-    var post_message = await user_db.post_message(message_title, message_body, user);
-
-    response.render('thank_you_message.hbs', {
-        output: await post_message
-    })
-
-    // response.render('test_forum.hbs', {
-    //     output: await post_message,
-    //     message: await get_message
-    // });
+    response.redirect('back');
 });
 
 app.listen(PORT, () => {

@@ -10,10 +10,10 @@ const user_db = require('../javascript/user_db.js');
 describe('add_new_user function', () => {
     it("returns account created!",  async () => {
         let add = await user_db.add_new_user('first_name_test',
-            'last_name_test',
             'test_email@gmail.com',
             'password_test',
-            'password_test');
+            'password_test'
+            );
 
         if (add === 'Email is already taken.') {
         	assert.equal(add, 'Email is already taken.')
@@ -26,18 +26,18 @@ describe('add_new_user function', () => {
 
     it('returns email already taken', async () => {
         await user_db.add_new_user('first_name_test',
-            'last_name_test',
             'test_email@gmail.com',
             'password_test',
-            'password_test');
+            'password_test'
+        );
 
         let add_again = await user_db.add_new_user('first_name_test',
-            'last_name_test',
             'test_email@gmail.com',
             'password_test',
-            'password_test');
+            'password_test'
+        );
 
-        assert.equal(add_again, 'Email is already taken.')
+        assert.equal(add_again, 'Email is already taken.');
 
         await user_db.delete_test()
     });
@@ -131,5 +131,34 @@ describe('email_get function', () => {
         }
 
         await user_db.delete_test()
+    })
+});
+
+///////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////TEST FORUM FUNCTIONS/////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+
+describe('Post Message function', () => {
+    it('returns success upon adding message to database', async () => {
+        let post_message = await user_db.post_message('Subject', 'message right here!', 'DELETEMESSAGE@gmail.com');
+
+        assert.equal(post_message, 'Message Posted');
+
+        await user_db.delete_test_message()
+    });
+
+    it('fails to send message due to email not found in database', async() => {
+        let post_message = await user_db.post_message('Subject', 'message right here!', 'DELETEMESGE@gmail.com');
+
+        assert.equal(post_message, 'Email is not found in the database');
+    })
+});
+
+describe('get_documents function', () => {
+    it('returns a list of messages', async() => {
+        let get_documents = await user_db.get_documents('messages');
+
+        assert.typeOf(get_documents, 'array');
+        assert.equal(get_documents.length, 17)
     })
 });

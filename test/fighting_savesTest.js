@@ -24,5 +24,26 @@ describe('function add_info', () => {
         assert.equal(arena.data().player_health, 50);
         assert.equal(arena.data().player_dps, 10);
 
+        assert.isNumber(arena.data().enemy_health)
+        // console.log(arena.data())
+        // console.log(assert.isNumber(arena.data().enemy_health))
     })
 });
+
+describe('get_info function', () => {
+    it('should return an object', async () => {
+        let info = await fight.get_info('test_fighting');
+
+        assert.typeOf(info, 'object')
+    });
+
+    it('returns an error if email not found', async()=>{
+        let info = await fight.get_info('test_fightingtest');
+
+        assert.typeOf(info, 'undefined')
+    })
+});
+
+// describe('battle function', () => {
+//     it('updates a function')
+// })
