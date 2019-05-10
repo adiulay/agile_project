@@ -10,21 +10,23 @@
     <link rel="stylesheet" href="StyleSheet/StyleSheet.css">
     <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
 </head>
-<body class="background">
+<body class="character">
+<h1>{{> header}}</h1>
     {{> nav_bar_non}}
 
     <div class="container">
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-3">
-                <h1>{{> header}}</h1>
+            <div class="col-md-5"></div>
+            <div class="col-md-4">
+
                 <form method="POST" action="/update">
+                    <br><br>
                     <input type="text" id="new_name" name="new_name" required minlength="1">
                     <input type="submit" value="Update Character Name">
                 </form>
                 {{welcome}}
             </div>
-            <div class="col-md-5"></div>
+            <div class="col-md-4"></div>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

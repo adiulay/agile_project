@@ -2,8 +2,35 @@ nav {
     margin-top: 0;
 }
 
+.jimmy{
+    margin-left:60px;
+    margin-right: 40px;
+}
+.jimmyphoto{
+    width:275px;
+    height:auto;
+    padding: 15px;
+    margin-top: 20px;
+}
+
 .background {
-    background-image: url("../Images/background.jpg");
+    background-image: url("../Images/background2.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+.character{
+    background-image: url("../Images/background3.png");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+.character1{
+    background-image: url("../Images/background2.jpg");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -11,10 +38,22 @@ nav {
     height: 100%;
 }
 
-/*rgb(0, 0, 0)*/
+
+
+.fight{
+    background-image: url("../Images/fight.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+
+
+}
+
 .lightbox {
     background:rgba(61, 55, 55,0.4);
-    border: 20px solid white;
+    border: 20px solid rgb(0, 0, 0);
     padding: 50px;
     width: 100%;
     float: none;
@@ -33,10 +72,19 @@ nav {
 
 .center {
     align-self: center;
+    background-color:black;
+    margin: 20px;
+    padding: 20px;
+    border-style: ridge;
 }
 
 .nav_text{
     color: #E3E3E3;
     font-family: 'Gloria Hallelujah', cursive;
     font-size: 20px;
+}
+
+.container{
+    margin-top: 30px;
+
 }

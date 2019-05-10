@@ -10,29 +10,48 @@
         <link rel="stylesheet" href="StyleSheet/StyleSheet.css">
         <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
     </head>
-    <body class="background">
+    <body class="character1">
 
-            {{> header}}
+    <header class="title">
+        {{header}}
+    </header>
             {{> nav_bar_char}}
 
         <div class="container">
             <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4 lightbox">
+                <div class="col-md-2"></div>
+                <div class="col-md-8 lightbox">
                     <h1>Character Page</h1>
-                    <a href="/character_creation">Create new Character</a>
-                    <br>
-                    <a href="/fight">Go Fighting</a>
-                    <br>
-                    <a href="/update_name">Update Character Name</a>
-                    <br>
-                    {{> character_stats}}
-                    {{> back_button}}
+                    <div class="row" >
+                        <div class="jimmy">
+                            <br>
+                            <a href="/character_creation">Create new Character</a>
+                            <br>
+                            <a href="/fight">Go Fighting</a>
+                            <br>
+                            <a href="/update_name">Update Character Name</a>
+                            <br>
+                            <div class="center">
+
+                                    <strong>Character Name</strong>
+                                    <p>{{character_name}}</p>
+                                    <strong>Health</strong>
+                                    <p>{{character_health}}</p>
+                                    <strong>Attack Damage</strong>
+                                    <p>{{character_dps}}</p>
+
+                            </div>
+
+                        </div >
+                        <div ><img src="Images/jimmy.jpg" alt="jimmyphoto"  class="jimmyphoto"></div>
+                    </div>
+                    <input type="button" value="Click to Go Back" onclick="history.back()">
                     <form method="POST" action="/delete">
                         <input type="submit" value="Delete Existing Character">
                     </form>
+
                 </div>
-                <div class="col-md-4"></div>
+                <div class="col-md-2"></div>
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

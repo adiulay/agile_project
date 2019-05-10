@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
+    <link rel="stylesheet" href="../static/css/app.css">
+    <link rel="stylesheet" href="../static/css/facelogin.css">
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCT-ig3IbJNgfDjoPqrOjjfrXj-pFkRuj0",
+            authDomain: "acit2911-project.firebaseapp.com",
+            databaseURL: "https://acit2911-project.firebaseio.com",
+            projectId: "acit2911-project",
+            storageBucket: "acit2911-project.appspot.com",
+            messagingSenderId: "290770888287"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <style>
+        .loader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #F5F8FA;
+            z-index: 9998;
+            text-align: center;
+        }
+
+        .plane-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+    </style>
+</head>
+<body>
+<form method="post" action="#">
+    Email:<br>
+    <input type="text" id="usr_email"><br>
+    User Password:<br>
+    <input type="text" id="usr_pass"><br>
+    <button type="button" onclick="signIn()">Sign In</button>
+    <button type="button" onclick="signOut()">Sign Out</button>
+    <button type="button" onclick="faceLogin()">FaceLogin</button>
+</form>
+<div id="loader" class="loader">
+    <div class="plane-container">
+        <div class="preloader-wrapper small active">
+            <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+            </div>
+
+            <div class="spinner-layer spinner-red">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+            </div>
+
+            <div class="spinner-layer spinner-yellow">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+            </div>
+
+            <div class="spinner-layer spinner-green">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="app">
+    <div style="background: url('/static/imgs/icon-plane.png') #FFFFFF">
+        <video  id="video" autoplay style="width: 0%;height: 0%;opacity: 0.2"></video>
+        <!--draw video screenshots-->
+        <canvas id="canvas" width="480" height="320"></canvas>
+    </div>
+    <!-- /.right-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+             immediately after the control sidebar -->
+    <div id="result_div">
+        <img id="result_pic" src="../static/imgs/tick.png"/>
+        <div class="tick"></div>
+    </div>
+</div>
+<script type="text/javascript" src="../static/js/app.js"></script>
+<script type="text/javascript" src="../static/js/login.js"></script>
+<script type="text/javascript" src="../static/js/face.js"></script>
+</body>
+</html>

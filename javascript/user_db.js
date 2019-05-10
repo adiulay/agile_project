@@ -13,6 +13,45 @@ firebase.initializeApp({
     messagingSenderId: "290770888287"
 });
 
+var check_username = async (user_name) => {
+    //fetches all the documents in the collection
+    var db = firebase.firestore();
+
+    var list = [];
+
+    try {
+        var messages = await db.collection('accounts');
+
+        var get_messages = await messages.get();
+
+        get_messages.forEach((element) => {
+            // if (element.data().username)
+            if (element.data().user_name === user_name) {
+                list.push(element.data())
+            }
+        });
+
+        return list
+
+        //returns a list of documents info
+        // console.log(list)
+        // return list.sort((a, b) => {
+        //     return new Date(b.created) - new Date(a.created)
+        // });
+    } catch (err) {
+        console.log(err);
+        return 'No new messages';
+    }
+};
+
+// check_username('adiulay').then((element)=> {
+//     // console.log(element)
+// }).catch(
+//     err => {
+//         console.log(err)
+//     }
+// );
+
 /////////////////////////////////////////////////////////////////////////////////////
 // get_documents().then( (data) => {
 //     console.log(data)
@@ -306,5 +345,6 @@ module.exports = {
     check_email,
     get_documents,
     post_message,
-    delete_test_message
+    delete_test_message,
+    check_username
 };
