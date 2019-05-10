@@ -54,7 +54,6 @@ function UploadFile() {
 }
 
 function addData(){
-    var passwordHash = require('password-hash');
     var fire_database = firebase.firestore();
     var fire_auth = firebase.auth();
     var user_name = document.getElementById("usrname").value;
@@ -89,12 +88,14 @@ function addData(){
                 console.log("Error happened");
             });
         }
-        fire_database.collection("accounts").doc(document.getElementById("email").value).set({
-            username: user_name,
+        fire_database.collection("accounts").add({
+            user_name: user_name,
             email: email,
-            password: passwordHash.generate(password)
+            password: password
         }).then(
-            alert("Thank you for your submission!")
+            setTimeout(function(){
+                window.location.href="http://localhost:8080/success"
+            }, 1400)
         );
     }
 }

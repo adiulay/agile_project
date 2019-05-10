@@ -6,27 +6,7 @@ const axios = require('axios');
 const _ = require('lodash');
 const fs = require('fs');
 
-function stringFromArray(data)
-{
-    var count = data.length;
-    var str = "";
-
-    for(var index = 0; index < count; index += 1)
-        str += String.fromCharCode(data[index]);
-
-    return str;
-}
-
-const path = './ACIT2911_PROJECT/static/js/user_tem.json';
-
-if (fs.existsSync(path)){
-    var readUser = fs.readFileSync(path);
-
-    var username = stringFromArray(readUser);
-
-} else {
-    return false
-}
+// const path = require('path');
 
 const {
     PORT = 8080,
@@ -92,28 +72,58 @@ app.use(express.static(__dirname + '/views'));
 // app.use(express.static(path.join(__dirname, '../', '/views')));
 
 app.get('/success', (request, response) => {
-    response.send('<h1>Redirecting to Home Page</h1><meta http-equiv="refresh" content="3;url=http://localhost:8080/facetime"/>')
+    response.send('<h1>Redirecting to Home Page</h1><meta http-equiv="refresh" content="1;url=http://localhost:8080/facetime"/>')
 });
 
-app.get('/facetime', async (request, response) => {
-    var user_info = await user_db.check_username(username);
-    // console.log(user_info);
+function wait(ms){
+    var start = new Date().getTime();
+    var end = start;
+    while(end < start + ms) {
+        end = new Date().getTime();
+    }
+}
 
-    if (user_info === undefined) {
+app.get('/facetime', async (request, response) => {
+    wait(1500);
+    function stringFromArray(data)
+    {
+        var count = data.length;
+        var str = "";
+
+        for(var index = 0; index < count; index += 1)
+            str += String.fromCharCode(data[index]);
+
+        return str;
+    }
+
+    var path = './ACIT2911_PROJECT/static/js/user_tem.json';
+
+    if (fs.existsSync(path)){
+        var readUser = fs.readFileSync(path);
+
+        var username = stringFromArray(readUser);
+        console.log(`reading: ${username}`)
+
+    } else {
+        console.log(false)
+    }
+
+    var user_info = await user_db.check_username(username);
+    console.log(user_info);
+    if (user_info === []) {
         response.redirect('/')
     } else {
-        try {
-            user = user_info[0].email;
-            fs.writeFileSync(path, "");
-            request.session.userId = user_info[0].user_name;
-            response.redirect('/index_b')
-        } catch {
-            response.redirect('/')
-        }
+        wait(1500);
+        user = user_info[0].email;
+        request.session.userId = user_info[0].user_name;
+        response.redirect('/index_b');
+        fs.unlink(path);
+
     }
 });
 
 app.get('/', redirectHome, (request, response) => {
+
     // if (request.session.userId) {
     //     response.redirect('/index_b');
     // } else {
@@ -126,20 +136,8 @@ app.get('/', redirectHome, (request, response) => {
     // }
 });
 
-app.get('/login', redirectHome, (request, response) => {
-    if (request.session.userId) {
-        response.redirect('/index_b');
-    } else {
-        response.render('login.hbs', {
-            title_page: 'Official Front Page',
-            header: 'Fight Simulator',
-            welcome: `Welcome ${user}`,
-            username: user
-        })
-    }
-});
-
 app.post('/user_logging_in', async (request, response) => {
+
 
     var email = request.body.email;
     var password = request.body.password;
@@ -151,14 +149,17 @@ app.post('/user_logging_in', async (request, response) => {
         request.session.userId = await user_db.email_get(user);
         response.redirect('/index_b')
     } else {
-        // response.redirect('/')
-        response.render('index.hbs', {
-            title_page: 'Official Front Page',
-            header: 'Fight Simulator',
-            welcome: `Welcome ${user}`,
-            username: user,
+        response.render('login.hbs', {
             output: output
         })
+        // response.redirect('/')
+        // response.render('index.hbs', {
+        //     title_page: 'Official Front Page',
+        //     header: 'Fight Simulator',
+        //     welcome: `Welcome ${user}`,
+        //     username: user,
+        //     output: output
+        // })
     }
 });
 
@@ -303,8 +304,8 @@ app.get('/fight', redirectLogin, async (request, response) => {
     } else {
         try {
             await fight.add_info(character_stats.character_name,
-            character_stats.character_health,
-            character_stats.character_attack_damage,
+                character_stats.character_health,
+                character_stats.character_attack_damage,
                 user);
 
             var arena_stats = await fight.get_info(user); //dictionary
@@ -422,8 +423,10 @@ app.post('/forum_post', redirectLogin, async (request, response) => {
 app.listen(PORT, () => {
     console.log(`Server is up on the port ${PORT}`);
     console.log(`http://localhost:${PORT}/`);
-    console.log(`http://localhost:${PORT}/facetime`);
-    console.log(`http://localhost:8000/login`)
+    console.log(`http://localhost:${PORT}/forum`);
+
+    console.log(`http://localhost:8000/login`);
+    console.log(`http://localhost:8000/register`)
     // character_db.init();
 });
 
