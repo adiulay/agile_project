@@ -7,3 +7,6 @@ node app
 
 to access the second server locate AGILE PROJECT folder
 python ./manage.py runserver localhost:8000
+
+mts
+47.254.47.108
